@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Search, Filter, Download, ChevronDown, ArrowUp, ArrowDown } from "lucide-react"
+import { useState } from "react";
+import { Search, Filter, Download, ChevronDown, ArrowUp, ArrowDown } from "lucide-react";
 
 // Transaction status component
 function TransactionStatus({ type }: { type: string }) {
-  let bgColor = "bg-gray-500/20"
-  let textColor = "text-gray-400"
-  let icon = <ArrowUp size={14} />
+  let bgColor = "bg-gray-500/20";
+  let textColor = "text-gray-400";
+  let icon = <ArrowUp size={14} />;
 
   switch (type.toLowerCase()) {
     case "credit":
-      bgColor = "bg-green-500/20"
-      textColor = "text-green-500"
-      icon = <ArrowUp size={14} />
-      break
+      bgColor = "bg-green-500/20";
+      textColor = "text-green-500";
+      icon = <ArrowUp size={14} />;
+      break;
     case "debit":
-      bgColor = "bg-red-500/20"
-      textColor = "text-red-500"
-      icon = <ArrowDown size={14} />
-      break
+      bgColor = "bg-red-500/20";
+      textColor = "text-red-500";
+      icon = <ArrowDown size={14} />;
+      break;
   }
 
   return (
@@ -27,13 +27,13 @@ function TransactionStatus({ type }: { type: string }) {
       {icon}
       <span className="text-xs font-medium">{type}</span>
     </div>
-  )
+  );
 }
 
 export default function Transactions() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [typeFilter, setTypeFilter] = useState("All")
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("All");
+
   // Mock transactions data
   const transactions = [
     {
@@ -43,7 +43,7 @@ export default function Transactions() {
       amount: "₹12,500",
       type: "Credit",
       status: "Completed",
-      account: "HDFC Bank ****1234"
+      account: "HDFC Bank ****1234",
     },
     {
       id: "TXN-12346",
@@ -52,7 +52,7 @@ export default function Transactions() {
       amount: "₹8,750",
       type: "Debit",
       status: "Completed",
-      account: "ICICI Bank ****5678"
+      account: "ICICI Bank ****5678",
     },
     {
       id: "TXN-12347",
@@ -61,7 +61,7 @@ export default function Transactions() {
       amount: "₹5,200",
       type: "Debit",
       status: "Completed",
-      account: "HDFC Bank ****1234"
+      account: "HDFC Bank ****1234",
     },
     {
       id: "TXN-12348",
@@ -70,7 +70,7 @@ export default function Transactions() {
       amount: "₹15,800",
       type: "Credit",
       status: "Completed",
-      account: "HDFC Bank ****1234"
+      account: "HDFC Bank ****1234",
     },
     {
       id: "TXN-12349",
@@ -79,7 +79,7 @@ export default function Transactions() {
       amount: "₹3,600",
       type: "Debit",
       status: "Completed",
-      account: "ICICI Bank ****5678"
+      account: "ICICI Bank ****5678",
     },
     {
       id: "TXN-12350",
@@ -88,7 +88,7 @@ export default function Transactions() {
       amount: "₹9,300",
       type: "Credit",
       status: "Pending",
-      account: "HDFC Bank ****1234"
+      account: "HDFC Bank ****1234",
     },
     {
       id: "TXN-12351",
@@ -97,7 +97,7 @@ export default function Transactions() {
       amount: "₹7,450",
       type: "Debit",
       status: "Completed",
-      account: "HDFC Bank ****1234"
+      account: "HDFC Bank ****1234",
     },
     {
       id: "TXN-12352",
@@ -106,29 +106,30 @@ export default function Transactions() {
       amount: "₹4,200",
       type: "Credit",
       status: "Completed",
-      account: "ICICI Bank ****5678"
-    }
-  ]
-  
+      account: "ICICI Bank ****5678",
+    },
+  ];
+
   // Filter transactions based on search query and type filter
-  const filteredTransactions = transactions.filter(transaction => {
-    const matchesSearch = 
+  const filteredTransactions = transactions.filter((transaction) => {
+    const matchesSearch =
       transaction.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      transaction.description.toLowerCase().includes(searchQuery.toLowerCase())
-    
-    const matchesType = typeFilter === "All" || transaction.type === typeFilter
-    
-    return matchesSearch && matchesType
-  })
+      transaction.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesType = typeFilter === "All" || transaction.type === typeFilter;
+
+    return matchesSearch && matchesType;
+  });
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h1 className="text-2xl font-bold">Transactions</h1>
           <p className="text-gray-400">View and manage your financial transactions</p>
         </div>
-        
+
         <div className="flex flex-wrap gap-3">
           <button className="flex items-center rounded-md border border-gray-700 bg-gray-800 px-3 py-1.5 text-sm">
             <Download size={16} className="mr-2 text-gray-400" />
@@ -136,7 +137,7 @@ export default function Transactions() {
           </button>
         </div>
       </div>
-      
+
       {/* Filters */}
       <div className="flex flex-col gap-4 rounded-xl border border-gray-800 bg-gray-900/50 p-4 backdrop-blur-sm sm:flex-row sm:items-center">
         <div className="relative flex-1">
@@ -149,11 +150,11 @@ export default function Transactions() {
             className="h-10 w-full rounded-md border border-gray-700 bg-gray-800 pl-10 pr-4 text-sm text-white placeholder-gray-400 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
         </div>
-        
+
         <div className="flex gap-3">
           <div className="flex items-center rounded-md border border-gray-700 bg-gray-800 px-3">
             <Filter size={16} className="mr-2 text-gray-400" />
-            <select 
+            <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
               className="h-10 bg-transparent text-sm text-white focus:outline-none"
@@ -163,14 +164,14 @@ export default function Transactions() {
               <option value="Debit">Debit</option>
             </select>
           </div>
-          
+
           <button className="flex items-center rounded-md border border-gray-700 bg-gray-800 px-3 py-2.5 text-sm">
             Date Range
             <ChevronDown size={16} className="ml-2 text-gray-400" />
           </button>
         </div>
       </div>
-      
+
       {/* Transactions Table */}
       <div className="overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 backdrop-blur-sm">
         <div className="overflow-x-auto">
@@ -203,41 +204,36 @@ export default function Transactions() {
             <tbody className="divide-y divide-gray-800">
               {filteredTransactions.map((transaction) => (
                 <tr key={transaction.id} className="hover:bg-gray-800/50">
-                  <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                    {transaction.id}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                    {transaction.date}
-                  </td>
-                  <td className="px-6 py-4 text-sm">
-                    {transaction.description}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                    {transaction.amount}
-                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">{transaction.id}</td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">{transaction.date}</td>
+                  <td className="px-6 py-4 text-sm">{transaction.description}</td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">{transaction.amount}</td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     <TransactionStatus type={transaction.type} />
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
-                    <span className={`inline-block rounded-full px-2 py-1 text-xs font-medium ${
-                      transaction.status === "Completed" ? "bg-green-500/10 text-green-500" : "bg-amber-500/10 text-amber-500"
-                    }`}>
+                    <span
+                      className={`inline-block rounded-full px-2 py-1 text-xs font-medium ${
+                        transaction.status === "Completed"
+                          ? "bg-green-500/10 text-green-500"
+                          : "bg-amber-500/10 text-amber-500"
+                      }`}
+                    >
                       {transaction.status}
                     </span>
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                    {transaction.account}
-                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">{transaction.account}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination */}
         <div className="flex items-center justify-between border-t border-gray-800 bg-gray-900/80 px-6 py-3">
           <div className="text-sm text-gray-400">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">8</span> of <span className="font-medium">24</span> results
+            Showing <span className="font-medium">1</span> to <span className="font-medium">8</span> of{" "}
+            <span className="font-medium">24</span> results
           </div>
           <div className="flex gap-1">
             <button className="rounded border border-gray-700 bg-gray-800 px-3 py-1 text-sm text-gray-400 hover:bg-gray-700">
@@ -249,5 +245,15 @@ export default function Transactions() {
             <button className="rounded border border-gray-700 bg-gray-800 px-3 py-1 text-sm text-gray-400 hover:bg-gray-700">
               2
             </button>
-            <button className="rounded border border-gray-700 bg-gray-800 px-3 py-1 text-\
-
+            <button className="rounded border border-gray-700 bg-gray-800 px-3 py-1 text-sm text-gray-400 hover:bg-gray-700">
+              3
+            </button>
+            <button className="rounded border border-gray-700 bg-gray-800 px-3 py-1 text-sm text-gray-400 hover:bg-gray-700">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
